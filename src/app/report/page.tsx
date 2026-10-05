@@ -171,7 +171,8 @@ export default function ReportPage() {
     if (newState && reportData && !hasContributed) {
        setHasContributed(true);
        try {
-         await fetch("http://localhost:8000/investigate/community-contribute", {
+         const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+         await fetch(`${apiUrl}/investigate/community-contribute`, {
            method: "POST",
            headers: { "Content-Type": "application/json" },
            body: JSON.stringify({
@@ -193,7 +194,8 @@ export default function ReportPage() {
     setIsUpdatingIncident(true);
     
     try {
-       const res = await fetch("http://localhost:8000/investigate/incident-update", {
+       const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+       const res = await fetch(`${apiUrl}/investigate/incident-update`, {
          method: "POST",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify({
@@ -242,7 +244,8 @@ export default function ReportPage() {
     setAskHistory(prev => [...prev, {role: 'user', text: q}]);
     setIsAsking(true);
     try {
-      const res = await fetch("http://localhost:8000/ask", {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const res = await fetch(`${apiUrl}/ask`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: q, report: reportData })
       });

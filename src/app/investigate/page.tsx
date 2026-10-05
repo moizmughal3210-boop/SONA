@@ -214,7 +214,8 @@ function InvestigateContent() {
         formData.append("audio", selectedFile!);
         formData.append("language", selectedLang);
         
-        const response = await fetch("http://localhost:8000/investigate", {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+        const response = await fetch(`${apiUrl}/investigate`, {
           method: "POST",
           body: formData,
         });
@@ -227,7 +228,8 @@ function InvestigateContent() {
         formData.append("mode", inputType);
         formData.append("language", selectedLang);
         
-        const response = await fetch("http://localhost:8000/investigate/media", {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+        const response = await fetch(`${apiUrl}/investigate/media`, {
           method: "POST",
           body: formData,
         });
@@ -235,7 +237,8 @@ function InvestigateContent() {
         result = await response.json();
       } else {
         addEvent("Text Analysis", "Running Unified Investigation Pipeline", 'processing');
-        const response = await fetch("http://localhost:8000/investigate/unified", {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+        const response = await fetch(`${apiUrl}/investigate/unified`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ input_type: inputType, content: textContent }),
