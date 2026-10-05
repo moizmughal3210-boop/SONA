@@ -1,20 +1,24 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Noto_Nastaliq_Urdu } from "next/font/google";
 import "./globals.css";
-import CursorGlow from "@/components/CursorGlow";
-import ScrollProgress from "@/components/ScrollProgress";
+import SpaceBackground from "@/components/SpaceBackground";
+import MicCursor from "@/components/MicCursor";
+import AppLayout from "@/components/layout/AppLayout";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
 
+const urduFont = Noto_Nastaliq_Urdu({
+  variable: "--font-urdu",
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "SONA — Audio Misinformation Investigation Platform",
-  description: "Because truth shouldn't be hard to hear.",
-  icons: {
-    icon: "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎙️</text></svg>",
-  },
+  title: "SONA 🇵🇰 — Pakistan Ka AI Investigation Platform",
+  description: "SONA Pakistan ka pehla AI investigation platform hai jo suspicious audio aur voice notes ko Urdu mein fact-check karta hai.",
 };
 
 export default function RootLayout({
@@ -23,11 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} antialiased h-full`}>
-      <body className="min-h-full flex flex-col relative bg-[#0A0A0F]">
-        <ScrollProgress />
-        <CursorGlow />
-        <div className="z-10 flex flex-col flex-1">{children}</div>
+    <html lang="en" className={`${inter.variable} ${urduFont.variable} antialiased h-full`}>
+      <body className="min-h-full flex flex-col relative bg-background text-foreground overflow-hidden">
+        <SpaceBackground />
+        <MicCursor />
+        <AppLayout>{children}</AppLayout>
       </body>
     </html>
   );

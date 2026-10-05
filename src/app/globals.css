@@ -1,72 +1,155 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0A0A0F;
-  --color-foreground: #F8FAFC;
-  --color-primary: #7C3AED;
-  --color-secondary: #06B6D4;
-  --color-success: #10B981;
-  --color-warning: #F59E0B;
-  --color-danger: #EF4444;
-  --color-muted: #94A3B8;
+  --color-background: transparent;
+  --color-surface: rgba(250, 249, 246, 0.85);
+  --color-surface-secondary: rgba(235, 234, 230, 0.6);
+  --color-foreground: #111111;
+  --color-primary: #C2A370;
+  --color-primary-light: #DBC49A;
+  --color-secondary: #4A4A4A;
+  --color-accent: #C2A370;
+  --color-success: #3A7D44;
+  --color-warning: #B37121;
+  --color-danger: #A63C3C;
+  --color-muted: #5B5B5B;
+  --color-border: rgba(0, 0, 0, 0.1);
+  --color-soft-grey: rgba(0, 0, 0, 0.05);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-urdu: var(--font-urdu), "Noto Nastaliq Urdu", serif;
 }
 
 :root {
-  --background: #0A0A0F;
-  --foreground: #F8FAFC;
+  --background: transparent;
+  --foreground: #F5F5F5;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  overflow-x: hidden;
 }
 
+.urdu-text {
+  font-family: var(--font-urdu);
+  direction: rtl;
+  text-align: right;
+  line-height: 2.2;
+  font-size: 1.1em;
+}
+
+/* Premium Light Glassmorphism Panels */
 .glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  color: var(--color-foreground);
+}
+
+.glass-card:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border-color: rgba(194, 163, 112, 0.3);
+}
+
+.glass-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+  color: var(--color-foreground);
+}
+
+.glass-nav {
+  background: rgba(250, 249, 246, 0.7);
+  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  color: var(--color-foreground);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+  color: var(--color-foreground);
+  transition: all 0.2s ease;
+}
+
+.glass-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 2px rgba(194, 163, 112, 0.15);
 }
 
 .btn-primary {
-  background-color: var(--color-primary);
-  color: white;
-  border-radius: 12px;
-  padding: 12px 24px;
-  transition: all 0.2s ease-in-out;
+  background: var(--color-foreground);
+  color: #FAFAFA;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0,0,0,0.8);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .btn-primary:hover {
-  background-color: #6D28D9;
-  transform: scale(1.02);
-  box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+  background: #333333;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
 }
 
 .btn-ghost {
   background-color: transparent;
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 12px 24px;
-  transition: all 0.2s ease-in-out;
+  color: var(--color-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .btn-ghost:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.15);
 }
 
 .gradient-text {
-  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--color-foreground);
+}
+
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.1));
 }
 
 @keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
+  100% { transform: translateX(100%); }
 }
 
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Force dark text for anything that uses text-foreground */
+.text-foreground {
+  color: var(--color-foreground);
+}
+
+.text-muted {
+  color: var(--color-muted);
+}
